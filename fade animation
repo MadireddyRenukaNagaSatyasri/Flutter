@@ -1,0 +1,92 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: FadeScreen(),
+    ),
+  );
+}
+
+class FadeScreen extends StatefulWidget {
+  @override
+  State<FadeScreen> createState() {
+    return _FadeScreenState();
+  }
+}
+
+class _FadeScreenState extends State<FadeScreen> {
+
+  // Controls the animation
+  double opacity = 1.0;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+
+      appBar: AppBar(
+        title: Text("Fade Animation"),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+      ),
+
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+
+          children: [
+
+            // Animated Widget
+            AnimatedOpacity(
+              opacity: opacity,
+              duration: Duration(seconds: 1),
+
+              child: Container(
+                width: 200,
+                height: 200,
+
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+
+                child: Center(
+                  child: Text(
+                    "HELLO",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 30),
+
+            // Button
+            ElevatedButton(
+              onPressed: () {
+
+                setState(() {
+
+                  if (opacity == 1.0) {
+                    opacity = 0.5;
+                  } else {
+                    opacity = 1.0;
+                  }
+
+                });
+
+              },
+
+              child: Text("FADE"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
