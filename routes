@@ -1,0 +1,115 @@
+
+
+
+
+import 'package:flutter/material.dart';
+void main()
+{
+  runApp(
+  MaterialApp(
+  initialRoute:'/',
+  routes:{
+    '/':(context)=>HomeScreen(),
+    '/second':(context)=>SecondScreen(),
+    '/third':(context)=>ThirdScreen(),
+  },
+  ),
+  );
+}
+class HomeScreen extends StatelessWidget
+{
+  @override
+  Widget build(BuildContext context)
+  {
+    return Scaffold(
+      appBar:AppBar(
+        title:Text("Home Screen"),
+        centerTitle:true,
+        backgroundColor:Colors.blue,
+     ),
+      body:Center(
+      child:Column(
+      mainAxisAlignment:MainAxisAlignment.center,
+      children:[
+        ElevatedButton(
+          style:ElevatedButton.styleFrom(backgroundColor:Colors.green,),
+        onPressed:(){
+          Navigator.pushNamed(context,'/second',);
+        },
+        child:Text("Second Screen"),
+        ),
+        SizedBox(height:20),
+        ElevatedButton(
+           style:ElevatedButton.styleFrom(backgroundColor:Colors.green,),
+        onPressed:(){
+          Navigator.pushNamed(context,'/third',);
+        },
+        child:Text("Third Screen"),),
+      ],
+      ),
+      ),
+    );
+  }
+}
+class SecondScreen extends StatelessWidget
+{
+  @override
+  Widget build(BuildContext context)
+  {
+    return Scaffold(
+    appBar:AppBar(
+    title:Text("Second Screen"),
+    centerTitle:true,
+    backgroundColor:Colors.blue,
+    ),
+    body:Center(
+    child:ElevatedButton(
+      style:ElevatedButton.styleFrom(backgroundColor:Colors.green,),
+    onPressed:() {
+      Navigator.pop(context);
+    },
+    child:Text("Go back"),
+    ),
+      ),
+    );
+  }
+}
+
+
+class ThirdScreen extends StatelessWidget
+{
+  @override
+  Widget build(BuildContext context)
+  {
+    return Scaffold(
+      appBar:AppBar(
+        title:Text("Third Screen"),
+        centerTitle:true,
+        backgroundColor:Colors.blue,
+     ),
+      body:Center(
+      child:Column(
+      mainAxisAlignment:MainAxisAlignment.center,
+      children:[
+        ElevatedButton(
+          style:ElevatedButton.styleFrom(backgroundColor:Colors.green,),
+        onPressed:(){
+          Navigator.pushNamed(context,'/second');
+        },
+        child:Text("Go back"),
+        ),
+        SizedBox(height:20),
+        ElevatedButton(
+          style:ElevatedButton.styleFrom(backgroundColor:Colors.green,),
+        onPressed:(){
+          Navigator.pushNamedAndRemoveUntil(context,'/',(route)=>false,);
+        },
+        child:Text("Go to home"),),
+      ],
+      ),
+      ),
+    );
+  }
+}
+
+
