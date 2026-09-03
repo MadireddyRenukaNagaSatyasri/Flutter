@@ -1,0 +1,169 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: AnimationScreen(),
+    ),
+  );
+}
+
+class AnimationScreen extends StatefulWidget {
+  @override
+  State<AnimationScreen> createState() {
+    return _AnimationScreenState();
+  }
+}
+
+class _AnimationScreenState extends State<AnimationScreen> {
+
+  double opacity = 1.0;
+  double position = 0.0;
+  double scale = 1.0;
+  double rotation = 0.0;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+
+      appBar: AppBar(
+        title: Text("Animation"),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+      ),
+
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+
+        children: [
+
+          // ONE BOX
+          AnimatedOpacity(
+            opacity: opacity,
+            duration: Duration(seconds: 1),
+
+            child: AnimatedScale(
+              scale: scale,
+              duration: Duration(seconds: 1),
+
+              child: AnimatedRotation(
+                turns: rotation,
+                duration: Duration(seconds: 1),
+
+                child: AnimatedContainer(
+                  duration: Duration(seconds: 1),
+
+                  transform: Matrix4.translationValues(
+                    position,
+                    0,
+                    0,
+                  ),
+
+                  width: 150,
+                  height: 150,
+
+                  decoration: BoxDecoration(
+                    color: Colors.orange,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+
+                  child: Center(
+                    child: Text(
+                      "BOX",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          SizedBox(height: 50),
+
+          // BUTTONS
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+
+            children: [
+
+              // FADE
+              ElevatedButton(
+                onPressed: () {
+
+                  setState(() {
+                    if (opacity == 1.0) {
+                      opacity = 0.5;
+                    } else {
+                      opacity = 1.0;
+                    }
+                  });
+
+                },
+                child: Text("FADE"),
+              ),
+
+              SizedBox(width: 8),
+
+              // SLIDE
+              ElevatedButton(
+                onPressed: () {
+
+                  setState(() {
+                    if (position == 0.0) {
+                      position = 100.0;
+                    } else {
+                      position = 0.0;
+                    }
+                  });
+
+                },
+                child: Text("SLIDE"),
+              ),
+
+              SizedBox(width: 8),
+
+              // SCALE
+              ElevatedButton(
+                onPressed: () {
+
+                  setState(() {
+                    if (scale == 1.0) {
+                      scale = 1.5;
+                    } else {
+                      scale = 1.0;
+                    }
+                  });
+
+                },
+                child: Text("SCALE"),
+              ),
+
+              SizedBox(width: 8),
+
+              // ROTATE
+              ElevatedButton(
+                onPressed: () {
+
+                  setState(() {
+                    if (rotation == 0.0) {
+                      rotation = 0.25;
+                    } else {
+                      rotation = 0.0;
+                    }
+                  });
+
+                },
+                child: Text("ROTATE"),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
